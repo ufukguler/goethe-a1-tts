@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goethe A1</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body class="loading-page">
+    <div class="page-loading-overlay" id="pageLoadingOverlay">
+        <div class="page-loading-content">
+            <div class="page-loading-spinner"></div>
+            <h2>🇩🇪 Goethe A1</h2>
+            <p>Loading vocabulary...</p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="header-section">
+            <h1>🇩🇪 Goethe A1</h1>
+            <div class="controls">
+                <button class="btn-primary" id="speakButton">🔊 Read All</button>
+                <button class="btn-stop" id="stopButton">⏹️ Stop</button>
+                <button class="btn-primary" id="resetButton">🔄 Reset Progress</button>
+            </div>
+            <p class="instruction-text">💡 Click on any row to start listening from that word until the end</p>
+        </div>
+        <div class="table-wrapper">
+            <table id="vocabTable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Word/Phrase</th>
+                        <th>Example Sentence(s)</th>
+                        <th>Meaning</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <tr>
+                        <td colspan="4" class="loading">Loading vocabulary...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <footer class="source-footer">
+        <p>
+            View on <a href="https://github.com/ufukguler/goethe-a1-tts" target="_blank" rel="noopener noreferrer">GitHub</a> - 
+            Source: <a href="https://www.goethe.de/pro/relaunch/prf/de/A1_SD1_Wortliste_02.pdf" target="_blank" rel="noopener noreferrer">www.goethe.de</a>
+        </p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

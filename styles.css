@@ -1,0 +1,607 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    @media (max-width: 576px) {
+        padding: 0;
+    }
+}
+
+body.loading-page .container {
+    display: none;
+}
+
+body.loading-page .source-footer {
+    display: none;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    @media (max-width: 576px) {
+        border-radius: 0;
+    }
+}
+
+@media (min-width: 1920px) {
+    .container {
+        max-width: 1600px;
+        padding: 40px;
+    }
+}
+
+@media (min-width: 2560px) {
+    .container {
+        max-width: 2000px;
+        padding: 50px;
+    }
+}
+
+@media (min-width: 3840px) {
+    .container {
+        max-width: 2800px;
+        padding: 60px;
+    }
+}
+
+.header-section {
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 100;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e2e8f0;
+    flex-shrink: 0;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+}
+
+@media (min-width: 1920px) {
+    h1 {
+        font-size: 3em;
+        margin-bottom: 40px;
+    }
+}
+
+@media (min-width: 2560px) {
+    h1 {
+        font-size: 3.5em;
+        margin-bottom: 50px;
+    }
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.instruction-text {
+    text-align: center;
+    color: #667eea;
+    font-size: 14px;
+    margin: 0;
+    padding: 10px;
+    background: #f0f4ff;
+    border-radius: 6px;
+    border-left: 4px solid #667eea;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: #667eea;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #5568d3;
+    transform: translateY(-2px);
+}
+
+.btn-speak {
+    background: #48bb78;
+    color: white;
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 4px;
+    margin-right: 8px;
+}
+
+.btn-speak:hover {
+    background: #38a169;
+}
+
+.btn-speak:active {
+    transform: scale(0.95);
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    overflow-y: auto;
+    position: relative;
+    flex: 1;
+    min-height: 0;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+}
+
+table {
+    width: 100%;
+    min-width: 600px;
+    border-collapse: collapse;
+    background: white;
+    table-layout: auto;
+}
+
+@media (min-width: 1920px) {
+    table {
+        min-width: 800px;
+    }
+    
+    th {
+        padding: 20px;
+        font-size: 16px;
+    }
+    
+    td {
+        padding: 15px 20px;
+        font-size: 15px;
+    }
+}
+
+@media (min-width: 2560px) {
+    table {
+        min-width: 1000px;
+    }
+    
+    th {
+        padding: 25px;
+        font-size: 18px;
+    }
+    
+    td {
+        padding: 18px 25px;
+        font-size: 16px;
+    }
+    
+    .word {
+        font-size: 18px;
+    }
+    
+    .example {
+        font-size: 16px;
+    }
+    
+    .meaning {
+        font-size: 16px;
+    }
+}
+
+thead {
+    position: sticky;
+    top: 0;
+    background: #667eea;
+    color: white;
+    z-index: 10;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+thead th {
+    position: sticky;
+    top: 0;
+}
+
+th {
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 3px solid #5568d3;
+}
+
+td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: middle;
+}
+
+.index-cell {
+    text-align: center;
+    color: #718096;
+    font-weight: 500;
+    width: 60px;
+    min-width: 60px;
+    padding: 12px 10px;
+}
+
+tbody tr:hover {
+    background: #f7fafc;
+}
+
+tbody tr.clickable-row {
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+tbody tr.clickable-row:active {
+    background: #edf2f7;
+}
+
+tbody tr.highlight {
+    background: #fff3cd;
+    box-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+    transition: all 0.3s ease;
+}
+
+.btn-stop {
+    background: #e53e3e;
+    color: white;
+}
+
+.btn-stop:hover {
+    background: #c53030;
+    transform: translateY(-2px);
+}
+
+.word {
+    font-weight: 600;
+    color: #2d3748;
+    font-size: 16px;
+    white-space: nowrap;
+    min-width: 120px;
+}
+
+.example {
+    color: #4a5568;
+    font-size: 14px;
+    line-height: 1.5;
+    flex: 1;
+    min-width: 150px;
+}
+
+.meaning {
+    color: #4a5568;
+    font-size: 14px;
+    line-height: 1.5;
+    font-style: italic;
+    flex: 1;
+    min-width: 150px;
+}
+
+.loading {
+    text-align: center;
+    padding: 40px;
+    color: #667eea;
+    font-size: 18px;
+}
+
+.page-loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.page-loading-overlay.hidden {
+    display: none;
+}
+
+.page-loading-content {
+    text-align: center;
+    color: #667eea;
+}
+
+.page-loading-content h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.page-loading-content p {
+    font-size: 18px;
+    color: #667eea;
+}
+
+.page-loading-spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #667eea;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 0;
+    }
+
+    .container {
+        padding: 0;
+        overflow-x: hidden;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .header-section {
+        padding: 15px;
+        padding-top: 20px;
+        margin-bottom: 0;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    h1 {
+        font-size: 1.75em;
+        margin-bottom: 20px;
+    }
+
+    .controls {
+        gap: 8px;
+        margin-bottom: 15px;
+    }
+
+    button {
+        padding: 10px 12px;
+        font-size: 13px;
+        border-radius: 8px;
+    }
+
+    .instruction-text {
+        font-size: 13px;
+        padding: 12px;
+        margin: 0;
+        border-radius: 8px;
+    }
+
+    .table-wrapper {
+        overflow-x: visible;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        width: 100%;
+        position: relative;
+        padding: 15px;
+    }
+
+    table {
+        width: 100%;
+        min-width: 100%;
+        display: block;
+    }
+
+    thead {
+        display: none;
+    }
+
+    tbody {
+        display: block;
+    }
+
+    tbody tr {
+        display: block;
+        position: relative;
+        margin-bottom: 12px;
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 16px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        transition: all 0.2s ease;
+    }
+
+    tbody tr:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transform: translateY(-2px);
+    }
+
+    tbody tr.highlight {
+        background: #fff3cd;
+        border-color: #ffc107;
+        box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+    }
+
+    tbody tr.clickable-row {
+        cursor: pointer;
+    }
+
+    tbody td {
+        display: block;
+        padding: 8px 0;
+        border: none;
+        text-align: left;
+    }
+
+    tbody td.index-cell {
+        display: inline-block;
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        width: auto;
+        padding: 4px 8px;
+        background: #f7fafc;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #667eea;
+    }
+
+    tbody td.word-cell {
+        padding-top: 0;
+        margin-bottom: 8px;
+    }
+
+    tbody td.example-cell {
+        margin-bottom: 8px;
+        padding-left: 0;
+    }
+
+    tbody td.meaning-cell {
+        padding-bottom: 0;
+        border-top: 1px solid #e2e8f0;
+        padding-top: 12px;
+        margin-top: 8px;
+    }
+
+    .word {
+        font-size: 18px;
+        font-weight: 700;
+        color: #2d3748;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .example {
+        font-size: 14px;
+        line-height: 1.6;
+        color: #4a5568;
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .meaning {
+        font-size: 14px;
+        line-height: 1.6;
+        color: #718096;
+        font-style: italic;
+    }
+
+    .btn-speak {
+        padding: 6px 10px;
+        font-size: 12px;
+        margin-right: 0;
+        flex-shrink: 0;
+        @media (max-width: 576px) {
+            display: none;
+        }       
+    }
+
+    .source-footer {
+        padding: 15px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .table-wrapper {
+        padding: 12px;
+    }
+
+    .header-section {
+        padding: 12px;
+        padding-top: 15px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+        margin-bottom: 15px;
+    }
+
+    .controls {
+        flex-direction: row;
+        gap: 6px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    button {
+        flex: 1;
+        min-width: 0;
+        padding: 8px 6px;
+        font-size: 12px;
+    }
+
+    .instruction-text {
+        font-size: 12px;
+        padding: 10px;
+    }
+
+    tbody tr {
+        padding: 14px;
+        margin-bottom: 10px;
+    }
+
+    .word {
+        font-size: 16px;
+    }
+
+    .example {
+        font-size: 13px;
+    }
+
+    .meaning {
+        font-size: 13px;
+    }
+}
+
+.source-footer {
+    text-align: center;
+    padding: 15px 20px;
+    color: #4a5568;
+    font-size: 16px;
+    flex-shrink: 0;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.source-footer a {
+    color: #667eea;
+    text-decoration: none;
+}
+
+.source-footer a:hover {
+    text-decoration: underline;
+}
+
