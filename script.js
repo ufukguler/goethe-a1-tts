@@ -4,17 +4,20 @@ if (!('speechSynthesis' in window)) {
     alert('Your browser does not support text-to-speech. Please use a modern browser.');
 }
 
-function cleanTextForSpeech(text) {
+function cleanTextForSpeech(text, preserveCommas = false) {
     if (!text) return '';
-    let cleaned = text.split(',')[0].trim();
+    let cleaned = text;
+    if (!preserveCommas) {
+        cleaned = text.split(',')[0].trim();
+    }
     cleaned = cleaned.replace(/\s*\([^)]*\)\s*/g, '').trim();
     return cleaned;
 }
 
-function speakGerman(text) {
+function speakGerman(text, preserveCommas = false) {
     if (!text) return;
     
-    const cleanedText = cleanTextForSpeech(text);
+    const cleanedText = cleanTextForSpeech(text, preserveCommas);
     
     window.speechSynthesis.cancel();
     
@@ -27,7 +30,7 @@ function speakGerman(text) {
     window.speechSynthesis.speak(utterance);
 }
 
-function createSpeakButton(text, lang = 'de-DE') {
+function createSpeakButton(text, lang = 'de-DE', preserveCommas = false) {
     const $button = $('<button>')
         .addClass('btn-speak')
         .html('🔊')
@@ -35,18 +38,18 @@ function createSpeakButton(text, lang = 'de-DE') {
         .on('click', function(e) {
             e.stopPropagation();
             if (lang === 'en-US') {
-                speakEnglish(text);
+                speakEnglish(text, preserveCommas);
             } else {
-                speakGerman(text);
+                speakGerman(text, preserveCommas);
             }
         });
     return $button[0];
 }
 
-function speakEnglish(text) {
+function speakEnglish(text, preserveCommas = false) {
     if (!text) return;
     
-    const cleanedText = cleanTextForSpeech(text);
+    const cleanedText = cleanTextForSpeech(text, preserveCommas);
     
     window.speechSynthesis.cancel();
     
@@ -121,7 +124,7 @@ function renderTable() {
         $wordCell.append(wordButton).append($wordSpan);
 
         const $exampleCell = $('<td>').addClass('example-cell');
-        const exampleButton = createSpeakButton(item.example);
+        const exampleButton = createSpeakButton(item.example, 'de-DE', true);
         const $exampleSpan = $('<span>').addClass('example').text(item.example);
         $exampleCell.append(exampleButton).append($exampleSpan);
 
@@ -213,7 +216,8 @@ function speakWordAndExample(index) {
         setTimeout(() => {
             if (!isSpeaking) return;
             
-            const exampleUtterance = new SpeechSynthesisUtterance(item.example);
+            const cleanedExample = cleanTextForSpeech(item.example, true);
+            const exampleUtterance = new SpeechSynthesisUtterance(cleanedExample);
             exampleUtterance.lang = 'de-DE';
             exampleUtterance.rate = 0.9;
             exampleUtterance.pitch = 1;
